@@ -1,0 +1,1456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PlantMapDialogBase</class>
+ <widget class="QDialog" name="PlantMapDialogBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>837</width>
+    <height>846</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>1400</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>PlantMap : Map Generator</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Edition / Création</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="editcreat_proj">
+          <layout class="QVBoxLayout" name="verticalLayout_12">
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QTextEdit" name="textEdit">
+             <property name="html">
+              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Bienvenue sur le plugin PlantMap : Map Generator&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ce plugin a pour objectif de générer un grand nombre de cartes. Il permet d'itérer sur une couche en fonction d'une liste de valeurs entrée en paramètre. Le mécanisme de génération repose sur la modification du filtre QGIS.&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Le filtrage appliquée sur la couche du projet QGIS ne sera pas maintenue lors de la génération. Le champ &amp;quot;filtrage complémentaire&amp;quot; permet d'appliquer lors de la génération un filtrage supplémentaire sur votre couche.&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Les pré-requis :&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	- Un projet QGS&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	- Une couche vectorielle &lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	- Un composer intégré au projet&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ce projet a été réalisé dans le cadre d'un projet de fin d'année à l'&lt;a href=&quot;http://esipe.u-pem.fr/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;ESIPE&lt;/span&gt;&lt;/a&gt; (Ecole Supérieur d'Ingénieur Paris Est) pour le compte de la &lt;a href=&quot;http://www.fcbn.fr/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;FCBN &lt;/span&gt;&lt;/a&gt;(Fédération des Conservatoires Botaniques Nationaux).&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Liens annexes :&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	- &lt;a href=&quot;http://siflore.fcbn.fr&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;siflore&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	- GitHub&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	- &lt;a href=&quot;http://www.qgis.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;QGIS&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; text-decoration: underline; color:#0000ff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; text-decoration: underline; color:#0000ff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::TextBrowserInteraction</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="UI_buttonCreateProjectFrom">
+             <property name="text">
+              <string>Création d'un projet à partir d'un existant</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="UI_buttonCreateProject">
+             <property name="text">
+              <string>Création d'un projet</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="UI_buttonEditProject">
+             <property name="text">
+              <string>Edition de projet existant</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="proj">
+          <layout class="QVBoxLayout" name="verticalLayout_15">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QGroupBox" name="groupBox">
+               <property name="title">
+                <string>Description du projet :</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <item>
+                 <widget class="QScrollArea" name="scrollArea">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_3">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>-120</y>
+                     <width>733</width>
+                     <height>443</height>
+                    </rect>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_2">
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_49">
+                      <property name="text">
+                       <string>Nom contact :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="0">
+                     <widget class="QLabel" name="label_32">
+                      <property name="text">
+                       <string>Organisme CBN :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QLabel" name="label_51">
+                      <property name="text">
+                       <string>Email contact :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="0">
+                     <widget class="QLineEdit" name="UI_contactEmail">
+                      <property name="statusTip">
+                       <string>email</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_63">
+                      <property name="text">
+                       <string>Nom du projet :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="10" column="0">
+                     <widget class="QWidget" name="widget_2" native="true">
+                      <layout class="QHBoxLayout" name="horizontalLayout">
+                       <item>
+                        <widget class="QLabel" name="label_50">
+                         <property name="minimumSize">
+                          <size>
+                           <width>100</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>50</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Période d'étude :</string>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>false</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QDateEdit" name="UI_startDate">
+                         <property name="maximumSize">
+                          <size>
+                           <width>150</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="calendarPopup">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QDateEdit" name="UI_endDate">
+                         <property name="maximumSize">
+                          <size>
+                           <width>150</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="baseSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="calendarPopup">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item row="5" column="0">
+                     <widget class="QLineEdit" name="UI_contactName"/>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLineEdit" name="UI_projectName">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_21">
+                      <property name="text">
+                       <string>Description projet : </string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="9" column="0">
+                     <widget class="QComboBox" name="UI_cbnOrganisation">
+                      <item>
+                       <property name="text">
+                        <string>FCBN</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN de Bailleul</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN de Franche-Comté</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN de Corse</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN du Bassin parisien</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN Méditerranéen de Porquerolles</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN Alpin</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN Nord-Est</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN Sud-Atlantique</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN de Brest</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN des Pyrénées et de Midi-Pyrénées</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN du Massif Central</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CBN Mascarin</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CB des Iles de Guadeloupe</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CB de Guyane</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CB de Martinique</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="3" column="0">
+                     <widget class="QPlainTextEdit" name="UI_projectDescription"/>
+                    </item>
+                    <item row="12" column="0">
+                     <widget class="QLabel" name="label_31">
+                      <property name="text">
+                       <string>Version du projet :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="13" column="0">
+                     <widget class="QLineEdit" name="UI_projectVersion"/>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_2">
+               <property name="title">
+                <string>Champ insipire</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                 <widget class="QScrollArea" name="UI_dataGeneaology">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_5">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>-240</y>
+                     <width>733</width>
+                     <height>572</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_6">
+                    <item>
+                     <widget class="QLabel" name="label_52">
+                      <property name="text">
+                       <string>Thésaurus ISO :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="UI_thesaurusISO">
+                      <item>
+                       <property name="text">
+                        <string>Agriculture</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Biologie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Limites</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Climatologie et météologie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Economie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Indiations altimétriques</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Environnement</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sciences de la Terre</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Santé</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Images et cartes de base</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Armée et renseignement</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Cours d'eau intérieurs</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Indications de lieux</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Mers et océans</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Aménagement du territoire et cadastre</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Société</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Subdivisions</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Transport</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Infrastructures de transport</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_53">
+                      <property name="text">
+                       <string>Thésaurus Inspire :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="UI_thesaurusInspire">
+                      <item>
+                       <property name="text">
+                        <string>Adresses</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Altitude</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Batiments</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Caractéristiques géographiques météorologiques</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Caractéristiques géographiques océaniques</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Conditions atmosphériques</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Dénominations géographiques</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Géologie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Habitats et biotopes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Hydrographie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Installations agricoles et aquacoles</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Installations de suivi environnemental</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Lieux de production et sites industriels</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Occupation des terres</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Ortho-imagerie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Parcelles cadastrales</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Ressources minérales</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Référentiels de coordonnées</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Régions biogéographiques</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Régions maritimes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Répartition de la population — démographie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Répartition des espèces</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Réseaux de transport</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Santé et sécurité des personnes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Services d'utilité publique et services publics</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sites protégés</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sols</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Sources d'énergie</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Systèmes de maillage géographique</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Unités administratives</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Unités statistiques</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Usage des sols</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Zones de gestion, de restriction ou de réglementation et unités de déclaration</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Zones à risque naturel</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_55">
+                      <property name="text">
+                       <string>Mots-clés :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_keywords">
+                      <property name="placeholderText">
+                       <string>Mots-clés séparés par des virgules</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_56">
+                      <property name="text">
+                       <string>Contact :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_contact"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_57">
+                      <property name="text">
+                       <string>Propriétaire données :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_dataOwner"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_58">
+                      <property name="text">
+                       <string>Généalogie de la donnée :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_genealogyData"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_59">
+                      <property name="text">
+                       <string>Responsable CBN :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_cbnManager"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_60">
+                      <property name="text">
+                       <string>Fréquence de mise à jour :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_updateFrequency"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_61">
+                      <property name="text">
+                       <string>Limite d'utilisation :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_usageLimit"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_62">
+                      <property name="text">
+                       <string>Etat de la donnée :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="UI_dataState"/>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="UI_buttonCreate">
+             <property name="text">
+              <string>Créer</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="UI_buttonPrevious">
+             <property name="text">
+              <string>Retour</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="createProjectWithAnotherOne">
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QGroupBox" name="groupBox_5">
+             <property name="title">
+              <string>Sélection d'un projet</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QFrame" name="frame">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_17">
+                 <item>
+                  <widget class="QComboBox" name="UI_comboProjectSelection"/>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="UI_displayProjectName">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="UI_displayProjectDescription">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTableWidget" name="UI_tabProject">
+                   <property name="editTriggers">
+                    <set>QAbstractItemView::NoEditTriggers</set>
+                   </property>
+                   <attribute name="horizontalHeaderDefaultSectionSize">
+                    <number>310</number>
+                   </attribute>
+                   <column>
+                    <property name="text">
+                     <string>Name</string>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Valeur</string>
+                    </property>
+                   </column>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="UI_validationProject">
+                   <property name="text">
+                    <string>Valider</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="UI_cancelProject">
+                   <property name="text">
+                    <string>Retour</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_mapgenerator">
+      <attribute name="title">
+       <string>Génération de cartes</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QFrame" name="frame_mapgenerator">
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="2" column="0">
+           <widget class="QPushButton" name="UI_generateMapButton">
+            <property name="text">
+             <string>Générer les cartes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="2" column="0">
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="sizeIncrement">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>ArrowCursor</cursorShape>
+              </property>
+              <property name="mouseTracking">
+               <bool>false</bool>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="title">
+               <string>Liste de taxons :</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <property name="sizeConstraint">
+                <enum>QLayout::SetNoConstraint</enum>
+               </property>
+               <item>
+                <widget class="QTableWidget" name="UI_taxonTab">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="editTriggers">
+                  <set>QAbstractItemView::NoEditTriggers</set>
+                 </property>
+                 <property name="defaultDropAction">
+                  <enum>Qt::IgnoreAction</enum>
+                 </property>
+                 <property name="alternatingRowColors">
+                  <bool>false</bool>
+                 </property>
+                 <property name="gridStyle">
+                  <enum>Qt::SolidLine</enum>
+                 </property>
+                 <property name="sortingEnabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="cornerButtonEnabled">
+                  <bool>false</bool>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>ID</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Description</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Statut</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Supprimer</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="widget_4" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_10">
+                  <item>
+                   <layout class="QGridLayout" name="gridLayout_5">
+                    <item row="1" column="3">
+                     <widget class="QPushButton" name="UI_buttonRemoveAll">
+                      <property name="text">
+                       <string>Supprimer tous les taxons</string>
+                      </property>
+                      <property name="autoDefault">
+                       <bool>false</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_6">
+                      <property name="text">
+                       <string>Gestion des taxons :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLineEdit" name="UI_taxonID">
+                      <property name="placeholderText">
+                       <string>Ajouter un taxon (ID du taxon)</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="2">
+                     <widget class="QPushButton" name="UI_validateTaxonList">
+                      <property name="minimumSize">
+                       <size>
+                        <width>145</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Charger un fichier ...</string>
+                      </property>
+                      <property name="autoDefault">
+                       <bool>false</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QPushButton" name="UI_validateTaxonID">
+                      <property name="text">
+                       <string>Valider le taxon</string>
+                      </property>
+                      <property name="autoDefault">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="4">
+                     <widget class="QPushButton" name="UI_deepValidation">
+                      <property name="text">
+                       <string>Vérif. Avancée</string>
+                      </property>
+                      <property name="autoDefault">
+                       <bool>false</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QgsCollapsibleGroupBox" name="mGroupBox_2">
+              <property name="title">
+               <string>Données en sortie</string>
+              </property>
+              <property name="collapsed">
+               <bool>false</bool>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QGroupBox" name="groupBox">
+                 <property name="title">
+                  <string/>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_18">
+                  <item>
+                   <layout class="QGridLayout" name="gridLayout_6">
+                    <item row="1" column="0">
+                     <widget class="QComboBox" name="UI_composerName"/>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QLabel" name="label_119">
+                      <property name="text">
+                       <string>Format des cartes en sortie :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_4">
+                      <property name="text">
+                       <string>Choisir un composeur :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QComboBox" name="UI_extensionMap">
+                      <item>
+                       <property name="text">
+                        <string>PNG</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>JPEG</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TIFF</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QGridLayout" name="gridLayout">
+                    <item row="3" column="0">
+                     <widget class="QLineEdit" name="UI_mapName">
+                      <property name="placeholderText">
+                       <string>Nom des cartes</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_9">
+                      <property name="text">
+                       <string>Nom des cartes en sortie :</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="2">
+                     <widget class="QToolButton" name="UI_storagePathButton">
+                      <property name="text">
+                       <string>...</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="1">
+                     <widget class="QLineEdit" name="UI_storagePath">
+                      <property name="placeholderText">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QLabel" name="label_2">
+                      <property name="text">
+                       <string>Dossier de stockage :</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QgsCollapsibleGroupBox" name="mGroupBox">
+              <property name="title">
+               <string>Données d'entrées</string>
+              </property>
+              <property name="collapsed">
+               <bool>false</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="0" column="0">
+                <widget class="QGroupBox" name="groupBox">
+                 <property name="title">
+                  <string/>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_4">
+                  <item row="6" column="0">
+                   <widget class="QWidget" name="widget_3" native="true">
+                    <layout class="QHBoxLayout" name="horizontalLayout_5">
+                     <item>
+                      <widget class="QLabel" name="label_11">
+                       <property name="text">
+                        <string>Filtrage complémentaire </string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="UI_linkExpression">
+                       <property name="text">
+                        <string>(Qgis Doc) </string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_13">
+                       <property name="text">
+                        <string>:</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item row="3" column="0" colspan="2">
+                   <widget class="QComboBox" name="UI_taxonLayer"/>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_111">
+                    <property name="text">
+                     <string>Couche taxon :</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_7">
+                    <property name="text">
+                     <string>Projet :</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="QComboBox" name="UI_projectSelection"/>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QComboBox" name="UI_iterationField"/>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_3">
+                    <property name="text">
+                     <string>Champ d'itération :</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QComboBox" name="UI_descriptionField"/>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QLabel" name="label_8">
+                    <property name="text">
+                     <string>Champ de description :</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0" colspan="2">
+                   <widget class="QLineEdit" name="UI_whereEditable">
+                    <property name="placeholderText">
+                     <string>MonChamp = &quot;Ma valeur&quot; AND [...]</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Export</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Dossier de stockage de l'archive :</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="UI_exportPath"/>
+          </item>
+          <item row="4" column="0">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="1">
+           <widget class="QToolButton" name="UI_exportPathButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QPushButton" name="UI_exportButton">
+            <property name="text">
+             <string>Exporter</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Log</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_11">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_12">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Logs liées à la génération de carte</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Pour plus de logs, consulter le fichier &quot;log.txt&quot; présent dans le dossier de génération</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="UI_logViewPlugin">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsCollapsibleGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>qgscollapsiblegroupbox.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>UI_projectName</tabstop>
+  <tabstop>UI_projectDescription</tabstop>
+  <tabstop>UI_contactName</tabstop>
+  <tabstop>UI_contactEmail</tabstop>
+  <tabstop>UI_cbnOrganisation</tabstop>
+  <tabstop>UI_startDate</tabstop>
+  <tabstop>UI_endDate</tabstop>
+  <tabstop>UI_projectVersion</tabstop>
+  <tabstop>UI_thesaurusISO</tabstop>
+  <tabstop>UI_thesaurusInspire</tabstop>
+  <tabstop>UI_keywords</tabstop>
+  <tabstop>UI_contact</tabstop>
+  <tabstop>UI_dataOwner</tabstop>
+  <tabstop>UI_genealogyData</tabstop>
+  <tabstop>UI_cbnManager</tabstop>
+  <tabstop>UI_updateFrequency</tabstop>
+  <tabstop>UI_usageLimit</tabstop>
+  <tabstop>UI_dataState</tabstop>
+  <tabstop>UI_buttonCreate</tabstop>
+  <tabstop>UI_buttonPrevious</tabstop>
+  <tabstop>UI_logViewPlugin</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>mGroupBox_2</tabstop>
+  <tabstop>UI_comboProjectSelection</tabstop>
+  <tabstop>UI_tabProject</tabstop>
+  <tabstop>UI_validationProject</tabstop>
+  <tabstop>UI_cancelProject</tabstop>
+  <tabstop>UI_taxonTab</tabstop>
+  <tabstop>mGroupBox</tabstop>
+  <tabstop>UI_exportPath</tabstop>
+  <tabstop>UI_exportButton</tabstop>
+  <tabstop>UI_projectSelection</tabstop>
+  <tabstop>UI_taxonLayer</tabstop>
+  <tabstop>UI_iterationField</tabstop>
+  <tabstop>UI_descriptionField</tabstop>
+  <tabstop>UI_whereEditable</tabstop>
+  <tabstop>UI_taxonID</tabstop>
+  <tabstop>UI_validateTaxonID</tabstop>
+  <tabstop>UI_validateTaxonList</tabstop>
+  <tabstop>UI_buttonRemoveAll</tabstop>
+  <tabstop>UI_deepValidation</tabstop>
+  <tabstop>UI_composerName</tabstop>
+  <tabstop>UI_extensionMap</tabstop>
+  <tabstop>UI_mapName</tabstop>
+  <tabstop>UI_storagePath</tabstop>
+  <tabstop>UI_storagePathButton</tabstop>
+  <tabstop>UI_generateMapButton</tabstop>
+  <tabstop>UI_buttonCreateProjectFrom</tabstop>
+  <tabstop>UI_buttonCreateProject</tabstop>
+  <tabstop>UI_buttonEditProject</tabstop>
+  <tabstop>UI_dataGeneaology</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>UI_exportPathButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>3</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>3</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

@@ -1,0 +1,47 @@
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=PlantMap : Map Generator
+qgisMinimumVersion=2.0
+description=QGIS plugin aim to generate a lot of map iterating over the layer's datas.
+version=1.0
+author=GreenMapper
+email=maxencebunel77@gmail.com,durandjonathan2@gmail.com
+
+about=
+	The map generation uses a qgis project, a vector layer and a composer to provide a lot of map. The generation is based on a modification of the subset filter of a layer.
+	More in detail, using PlantMap you can :
+	- Produce several map
+	- Create some project
+	- Generate Metadata
+	- Export your productions
+	The purpose of this project was to export maps then upload them into a library.
+
+tracker=Master
+repository=Master
+# End of mandatory metadata
+
+# Recommended items:
+
+# Uncomment the following line and add your changelog:
+# changelog=
+
+# Tags are comma separated with spaces allowed
+tags=generation,map,massmap,qgis,plant,fcbn,esipe,metadata,inspire
+
+homepage=
+category=Plugins
+icon=icon.png
+# experimental flag
+experimental=True
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
+
