@@ -33,8 +33,7 @@ class PlantMapProgress(QtGui.QDialog, plantmap_progress_base.Ui_PlantMapDialogBa
 		# added a file for write the log (if a path was passed)		
 		self.fileHandler = None
 		if pathFileLog is not None:
-			self.fileHandler = FileHandler()
-			self.fileHandler.open(pathFileLog + "/log.txt")
+			self.fileHandler = FileHandler(pathFileLog + "/log.txt")
 			self.logger.addOutput(self.fileHandler) 
 
 		#In this function, you can excecute actions, in Main thread juste beore sart the thread

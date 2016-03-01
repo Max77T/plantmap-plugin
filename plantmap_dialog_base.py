@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'plantmap_dialog_base.ui'
 #
-# Created: Thu Feb 25 10:41:08 2016
+# Created: Tue Mar  1 09:35:58 2016
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,7 +71,7 @@ class Ui_PlantMapDialogBase(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents_3 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, -120, 733, 443))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 736, 377))
         self.scrollAreaWidgetContents_3.setObjectName(_fromUtf8("scrollAreaWidgetContents_3"))
         self.gridLayout_2 = QtGui.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
@@ -163,7 +163,7 @@ class Ui_PlantMapDialogBase(object):
         self.UI_dataGeneaology.setWidgetResizable(True)
         self.UI_dataGeneaology.setObjectName(_fromUtf8("UI_dataGeneaology"))
         self.scrollAreaWidgetContents_5 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, -240, 733, 572))
+        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 736, 462))
         self.scrollAreaWidgetContents_5.setObjectName(_fromUtf8("scrollAreaWidgetContents_5"))
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
@@ -421,7 +421,7 @@ class Ui_PlantMapDialogBase(object):
         self.verticalLayout_2.addWidget(self.widget_4)
         self.gridLayout_8.addWidget(self.groupBox_3, 2, 0, 1, 1)
         self.mGroupBox_2 = gui.QgsCollapsibleGroupBox(self.frame_mapgenerator)
-        self.mGroupBox_2.setCollapsed(False)
+        self.mGroupBox_2.setProperty("collapsed", False)
         self.mGroupBox_2.setObjectName(_fromUtf8("mGroupBox_2"))
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.mGroupBox_2)
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
@@ -470,7 +470,7 @@ class Ui_PlantMapDialogBase(object):
         self.horizontalLayout_4.addWidget(self.groupBox1)
         self.gridLayout_8.addWidget(self.mGroupBox_2, 3, 0, 1, 1)
         self.mGroupBox = gui.QgsCollapsibleGroupBox(self.frame_mapgenerator)
-        self.mGroupBox.setCollapsed(False)
+        self.mGroupBox.setProperty("collapsed", False)
         self.mGroupBox.setObjectName(_fromUtf8("mGroupBox"))
         self.gridLayout_9 = QtGui.QGridLayout(self.mGroupBox)
         self.gridLayout_9.setObjectName(_fromUtf8("gridLayout_9"))
@@ -557,9 +557,6 @@ class Ui_PlantMapDialogBase(object):
         self.gridLayout_11.setObjectName(_fromUtf8("gridLayout_11"))
         self.verticalLayout_121 = QtGui.QVBoxLayout()
         self.verticalLayout_121.setObjectName(_fromUtf8("verticalLayout_121"))
-        self.label_5 = QtGui.QLabel(self.tab_2)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.verticalLayout_121.addWidget(self.label_5)
         self.label_10 = QtGui.QLabel(self.tab_2)
         self.label_10.setObjectName(_fromUtf8("label_10"))
         self.verticalLayout_121.addWidget(self.label_10)
@@ -634,27 +631,27 @@ class Ui_PlantMapDialogBase(object):
         self.textEdit.setHtml(QtGui.QApplication.translate("PlantMapDialogBase", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Bienvenue sur le plugin PlantMap : Map Generator</span></p>\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ce plugin a pour objectif de générer un grand nombre de cartes. Il permet d\'itérer sur une couche en fonction d\'une liste de valeurs entrée en paramètre. Le mécanisme de génération repose sur la modification du filtre QGIS.</p>\n"
-"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Le filtrage appliquée sur la couche du projet QGIS ne sera pas maintenue lors de la génération. Le champ &quot;filtrage complémentaire&quot; permet d\'appliquer lors de la génération un filtrage supplémentaire sur votre couche.</p>\n"
-"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Les pré-requis :</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    - Un projet QGS</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    - Une couche vectorielle </p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    - Un composer intégré au projet</p>\n"
-"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ce projet a été réalisé dans le cadre d\'un projet de fin d\'année à l\'<a href=\"http://esipe.u-pem.fr/\"><span style=\" text-decoration: underline; color:#0000ff;\">ESIPE</span></a> (Ecole Supérieur d\'Ingénieur Paris Est) pour le compte de la <a href=\"http://www.fcbn.fr/\"><span style=\" text-decoration: underline; color:#0000ff;\">FCBN </span></a>(Fédération des Conservatoires Botaniques Nationaux).</p>\n"
-"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Liens annexes :</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    - <a href=\"http://siflore.fcbn.fr\"><span style=\" text-decoration: underline; color:#0000ff;\">siflore</span></a></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    - GitHub</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">    - <a href=\"http://www.qgis.org\"><span style=\" text-decoration: underline; color:#0000ff;\">QGIS</span></a></p>\n"
-"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; text-decoration: underline; color:#0000ff;\"><br /></p>\n"
-"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; text-decoration: underline; color:#0000ff;\"><br /></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:600;\">Bienvenue sur le plugin PlantMap : Map Generator</span></p>\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">Ce plugin a pour objectif de générer un grand nombre de cartes. Il permet d\'itérer sur une couche en fonction d\'une liste de valeurs entrée en paramètre. Le mécanisme de génération repose sur la modification du filtre QGIS.</span></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">Le filtrage appliquée sur la couche du projet QGIS ne sera pas maintenue lors de la génération. Le champ &quot;filtrage complémentaire&quot; permet d\'appliquer lors de la génération un filtrage supplémentaire sur votre couche.</span></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">Les pré-requis :</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">    - Un projet QGS</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">    - Une couche vectorielle </span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">    - Un composer intégré au projet</span></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">Ce projet a été réalisé dans le cadre d\'un projet de fin d\'année à l\'</span><a href=\"http://esipe.u-pem.fr/\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt; text-decoration: underline; color:#0000ff;\">ESIPE</span></a><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\"> (Ecole Supérieur d\'Ingénieur Paris Est) pour le compte de la </span><a href=\"http://www.fcbn.fr/\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt; text-decoration: underline; color:#0000ff;\">FCBN </span></a><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">(Fédération des Conservatoires Botaniques Nationaux).</span></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">Liens annexes :</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">    - </span><a href=\"http://siflore.fcbn.fr\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt; text-decoration: underline; color:#0000ff;\">siflore</span></a></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">    - </span><a href=\"https://github.com/Max77T/plantmap-pluginr\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt; text-decoration: underline; color:#0000ff;\">GitHub</span></a></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt;\">    - </span><a href=\"http://www.qgis.org\"><span style=\" font-family:\'Ubuntu\'; font-size:11pt; text-decoration: underline; color:#0000ff;\">QGIS</span></a></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt; text-decoration: underline; color:#0000ff;\"><br /></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt; text-decoration: underline; color:#0000ff;\"><br /></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_buttonCreateProjectFrom.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Création d\'un projet à partir d\'un existant", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_buttonCreateProject.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Création d\'un projet", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_buttonEditProject.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Edition de projet existant", None, QtGui.QApplication.UnicodeUTF8))
@@ -685,13 +682,13 @@ class Ui_PlantMapDialogBase(object):
         self.label_31.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Version du projet :", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setTitle(QtGui.QApplication.translate("PlantMapDialogBase", "Champ insipire", None, QtGui.QApplication.UnicodeUTF8))
         self.label_52.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Thésaurus ISO :", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusISO.setItemText(0, QtGui.QApplication.translate("PlantMapDialogBase", "Agriculture", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusISO.setItemText(1, QtGui.QApplication.translate("PlantMapDialogBase", "Biologie", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusISO.setItemText(2, QtGui.QApplication.translate("PlantMapDialogBase", "Limites", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusISO.setItemText(3, QtGui.QApplication.translate("PlantMapDialogBase", "Climatologie et météologie", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusISO.setItemText(4, QtGui.QApplication.translate("PlantMapDialogBase", "Economie", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusISO.setItemText(5, QtGui.QApplication.translate("PlantMapDialogBase", "Indiations altimétriques", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusISO.setItemText(6, QtGui.QApplication.translate("PlantMapDialogBase", "Environnement", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusISO.setItemText(0, QtGui.QApplication.translate("PlantMapDialogBase", "Environnement", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusISO.setItemText(1, QtGui.QApplication.translate("PlantMapDialogBase", "Agriculture", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusISO.setItemText(2, QtGui.QApplication.translate("PlantMapDialogBase", "Biologie", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusISO.setItemText(3, QtGui.QApplication.translate("PlantMapDialogBase", "Limites", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusISO.setItemText(4, QtGui.QApplication.translate("PlantMapDialogBase", "Climatologie et météologie", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusISO.setItemText(5, QtGui.QApplication.translate("PlantMapDialogBase", "Economie", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusISO.setItemText(6, QtGui.QApplication.translate("PlantMapDialogBase", "Indiations altimétriques", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_thesaurusISO.setItemText(7, QtGui.QApplication.translate("PlantMapDialogBase", "Sciences de la Terre", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_thesaurusISO.setItemText(8, QtGui.QApplication.translate("PlantMapDialogBase", "Santé", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_thesaurusISO.setItemText(9, QtGui.QApplication.translate("PlantMapDialogBase", "Images et cartes de base", None, QtGui.QApplication.UnicodeUTF8))
@@ -705,28 +702,28 @@ class Ui_PlantMapDialogBase(object):
         self.UI_thesaurusISO.setItemText(17, QtGui.QApplication.translate("PlantMapDialogBase", "Transport", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_thesaurusISO.setItemText(18, QtGui.QApplication.translate("PlantMapDialogBase", "Infrastructures de transport", None, QtGui.QApplication.UnicodeUTF8))
         self.label_53.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Thésaurus Inspire :", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(0, QtGui.QApplication.translate("PlantMapDialogBase", "Adresses", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(1, QtGui.QApplication.translate("PlantMapDialogBase", "Altitude", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(2, QtGui.QApplication.translate("PlantMapDialogBase", "Batiments", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(3, QtGui.QApplication.translate("PlantMapDialogBase", "Caractéristiques géographiques météorologiques", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(4, QtGui.QApplication.translate("PlantMapDialogBase", "Caractéristiques géographiques océaniques", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(5, QtGui.QApplication.translate("PlantMapDialogBase", "Conditions atmosphériques", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(6, QtGui.QApplication.translate("PlantMapDialogBase", "Dénominations géographiques", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(7, QtGui.QApplication.translate("PlantMapDialogBase", "Géologie", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(8, QtGui.QApplication.translate("PlantMapDialogBase", "Habitats et biotopes", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(9, QtGui.QApplication.translate("PlantMapDialogBase", "Hydrographie", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(10, QtGui.QApplication.translate("PlantMapDialogBase", "Installations agricoles et aquacoles", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(11, QtGui.QApplication.translate("PlantMapDialogBase", "Installations de suivi environnemental", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(12, QtGui.QApplication.translate("PlantMapDialogBase", "Lieux de production et sites industriels", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(13, QtGui.QApplication.translate("PlantMapDialogBase", "Occupation des terres", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(14, QtGui.QApplication.translate("PlantMapDialogBase", "Ortho-imagerie", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(15, QtGui.QApplication.translate("PlantMapDialogBase", "Parcelles cadastrales", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(16, QtGui.QApplication.translate("PlantMapDialogBase", "Ressources minérales", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(17, QtGui.QApplication.translate("PlantMapDialogBase", "Référentiels de coordonnées", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(18, QtGui.QApplication.translate("PlantMapDialogBase", "Régions biogéographiques", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(19, QtGui.QApplication.translate("PlantMapDialogBase", "Régions maritimes", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(20, QtGui.QApplication.translate("PlantMapDialogBase", "Répartition de la population — démographie", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_thesaurusInspire.setItemText(21, QtGui.QApplication.translate("PlantMapDialogBase", "Répartition des espèces", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(0, QtGui.QApplication.translate("PlantMapDialogBase", "Répartition des espèces", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(1, QtGui.QApplication.translate("PlantMapDialogBase", "Adresses", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(2, QtGui.QApplication.translate("PlantMapDialogBase", "Altitude", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(3, QtGui.QApplication.translate("PlantMapDialogBase", "Batiments", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(4, QtGui.QApplication.translate("PlantMapDialogBase", "Caractéristiques géographiques météorologiques", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(5, QtGui.QApplication.translate("PlantMapDialogBase", "Caractéristiques géographiques océaniques", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(6, QtGui.QApplication.translate("PlantMapDialogBase", "Conditions atmosphériques", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(7, QtGui.QApplication.translate("PlantMapDialogBase", "Dénominations géographiques", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(8, QtGui.QApplication.translate("PlantMapDialogBase", "Géologie", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(9, QtGui.QApplication.translate("PlantMapDialogBase", "Habitats et biotopes", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(10, QtGui.QApplication.translate("PlantMapDialogBase", "Hydrographie", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(11, QtGui.QApplication.translate("PlantMapDialogBase", "Installations agricoles et aquacoles", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(12, QtGui.QApplication.translate("PlantMapDialogBase", "Installations de suivi environnemental", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(13, QtGui.QApplication.translate("PlantMapDialogBase", "Lieux de production et sites industriels", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(14, QtGui.QApplication.translate("PlantMapDialogBase", "Occupation des terres", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(15, QtGui.QApplication.translate("PlantMapDialogBase", "Ortho-imagerie", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(16, QtGui.QApplication.translate("PlantMapDialogBase", "Parcelles cadastrales", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(17, QtGui.QApplication.translate("PlantMapDialogBase", "Ressources minérales", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(18, QtGui.QApplication.translate("PlantMapDialogBase", "Référentiels de coordonnées", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(19, QtGui.QApplication.translate("PlantMapDialogBase", "Régions biogéographiques", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(20, QtGui.QApplication.translate("PlantMapDialogBase", "Régions maritimes", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_thesaurusInspire.setItemText(21, QtGui.QApplication.translate("PlantMapDialogBase", "Répartition de la population — démographie", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_thesaurusInspire.setItemText(22, QtGui.QApplication.translate("PlantMapDialogBase", "Réseaux de transport", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_thesaurusInspire.setItemText(23, QtGui.QApplication.translate("PlantMapDialogBase", "Santé et sécurité des personnes", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_thesaurusInspire.setItemText(24, QtGui.QApplication.translate("PlantMapDialogBase", "Services d\'utilité publique et services publics", None, QtGui.QApplication.UnicodeUTF8))
@@ -793,13 +790,12 @@ class Ui_PlantMapDialogBase(object):
         self.label_7.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Projet :", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Champ d\'itération :", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Champ de description :", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_whereEditable.setPlaceholderText(QtGui.QApplication.translate("PlantMapDialogBase", "MonChamp = \"Ma valeur\" AND [...]", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_whereEditable.setPlaceholderText(QtGui.QApplication.translate("PlantMapDialogBase", "\"MonChamp\" = \'Ma valeur\' AND [...]", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_mapgenerator), QtGui.QApplication.translate("PlantMapDialogBase", "Génération de cartes", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Dossier de stockage de l\'archive :", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Dossier de stockage à exporter :", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_exportPathButton.setText(QtGui.QApplication.translate("PlantMapDialogBase", "...", None, QtGui.QApplication.UnicodeUTF8))
         self.UI_exportButton.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Exporter", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("PlantMapDialogBase", "Export", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_5.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Logs liées à la génération de carte", None, QtGui.QApplication.UnicodeUTF8))
         self.label_10.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Pour plus de logs, consulter le fichier \"log.txt\" présent dans le dossier de génération", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtGui.QApplication.translate("PlantMapDialogBase", "Log", None, QtGui.QApplication.UnicodeUTF8))
 

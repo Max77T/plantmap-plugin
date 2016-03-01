@@ -24,7 +24,7 @@ about=
 	The purpose of this project was to export maps then upload them into a library.
 
 tracker=Master
-repository=Master
+repository=https://github.com/Max77T/plantmap-plugin
 # End of mandatory metadata
 
 # Recommended items:

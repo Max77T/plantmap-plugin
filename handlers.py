@@ -19,19 +19,13 @@ class FileHandler(HandlerInterface):
 		This class implement the interface HandlerInterface to log informations in a file
 	"""
 
-	def __init__(self):
+	def __init__(self, pathFile):
 		super(FileHandler,self).__init__()
 		self.fileLog = None
 		self.lock = threading.Lock()
-
-	def open(self, pathFile):
-		"""
-			Open the file log in the storage path of the map generation
-		"""
 		with self.lock:
 			if self.fileLog is None:
 				self.fileLog = codecs.open(pathFile, "a", "utf-8")
-		#TODO : Sinon, on raise une exception
 
 	def close(self):
 		"""

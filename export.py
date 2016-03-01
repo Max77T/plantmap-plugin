@@ -89,7 +89,7 @@ class Export:
 		excludeMap = len(self.listOfImg) - len(self.listOfImgToArchive)
 		excludeMeta = len(self.listOfMetadata) - len(self.listOfImgToArchive)
 		# Exclude file generation_info
-		excludeMeta -= 1
+		# excludeMeta -= 1
 		if excludeMap > 0:
 			logger.info(" Image(s) exclue(s) : " + str(excludeMap))
 

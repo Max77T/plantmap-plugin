@@ -32,7 +32,7 @@ class GeneratorMap(PlantMapThreadInterface):
         self.imgDestination = genData.storagePath.text()
         self.fileName = genData.mapName.text()
         self.imgFormat = genData.extension.currentText()
-        self.composerName = genData.composer.composerWindow().windowTitle()
+        self.composerName = QgisUtils.composer_windowTitle(genData.composer)
         self.taxonList = genData.taxonList
         self.whereEditable = genData.whereEditable.text()
         self.fieldName = genData.iterationField.currentText()
@@ -41,7 +41,7 @@ class GeneratorMap(PlantMapThreadInterface):
 
         self.create_json_project_qgis()
 
-        self.composer = genData.composer.composition()
+        self.composer = QgisUtils.composer_composition(genData.composer)
         self.layer = genData.layer
         self.projectXML = listMetadataToCreate
 
@@ -120,7 +120,7 @@ class GeneratorMap(PlantMapThreadInterface):
                     if(self.isKilled() == True):
                         break
                     if result == False:
-                        raise GenerateException(u"Conditions de filtrages incorectes : " + filterLayer)
+                        raise GenerateException(u"Conditions de filtrages incorrectes : " + filterLayer)
                     # Generate the map
                     image = QgisUtils.composer_printPageAsRaster(self.composer)
                     if(self.isKilled() == True):

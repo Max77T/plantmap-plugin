@@ -15,6 +15,15 @@ class QgisUtils:
 		return composer.printPageAsRaster(0)
 
 	@staticmethod
+	def composer_windowTitle(composer):
+		return composer.composerWindow().windowTitle()
+
+	@staticmethod
+	def composer_composition(composer):
+		return composer.composition()
+	
+
+	@staticmethod
 	def composer_saveImage(image, destinationFile, format):
 		return image.save(destinationFile, format)
 

@@ -8,6 +8,20 @@ class PlantMapThreadInterface(QThread):
 	"""
 		This class simulate an interface that a thread need to implement
 	"""
+	def run(self):
+		"""
+			Represent the main work of the thread
+			TODO : Need to implement this method
+		"""
+		pass
+
+	def getResult(self):
+		"""
+			Allow PlantMap to get the result of the thread
+			TODO : Need to implement this method
+		"""
+		pass
+
 
 	killed = False
 	timer = None
@@ -28,17 +42,6 @@ class PlantMapThreadInterface(QThread):
 		"""
 		self.killed = True
 
-	def run(self):
-		"""
-			Represent the main work of the thread
-		"""
-		pass
-
-	def getResult(self):
-		"""
-			Allow PlantMap to get the result of the thread
-		"""
-		pass
 
 	def timerInit(self, nbTotal):
 		"""
