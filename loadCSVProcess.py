@@ -17,7 +17,7 @@ class loadCSV(PlantMapThreadInterface):
 		This class implement PlantMapThreadInterface which allow him to load a csv and extract the data trough a thread
 	"""
 
-	def __init__(self, csvFile, layer, iterationField, descriptionField, whereEditable):
+	def __init__(self, csvFile, layer, iterationField, descriptionField, whereEditable, fieldIsString = False):
 		super(loadCSV, self).__init__()
 		self.listTaxon = []
 		self.csvFile = csvFile
@@ -26,6 +26,7 @@ class loadCSV(PlantMapThreadInterface):
 		self.descriptionField = descriptionField
 		self.whereEditable = whereEditable
 		self.pme = plantMapEngine()
+		self.fieldIsString = fieldIsString
 
 
 	def run(self):
@@ -51,13 +52,17 @@ class loadCSV(PlantMapThreadInterface):
 					#Initialize the progress bar
 					self.timerNewTurn()                
 					self.timerNotify()
+					#If the taxon name have a qote, you need to double qote (for the filter)
+					taxon_unicode = unicode(row[0], "utf8").replace("'", "''")
+					if self.fieldIsString == True:
+						taxon_unicode = "'" + taxon_unicode + "'"
 					if row: 
 						# get the description from the layer of the cell contents
-						descriptionFeature = self.pme.get_description(row[0],self.layer,self.iterationField,self.descriptionField, self.whereEditable)
+						descriptionFeature = self.pme.get_description(taxon_unicode,self.layer,self.iterationField,self.descriptionField, self.whereEditable)
 						if descriptionFeature != None:       
-							self.listTaxon.append((row[0],descriptionFeature,"OK"))
+							self.listTaxon.append((taxon_unicode,descriptionFeature,"OK"))
 						else:
-							self.listTaxon.append((row[0],descriptionFeature,"NOK"))
+							self.listTaxon.append((taxon_unicode,descriptionFeature,"NOK"))
 				self.timerEnd()
 				self.logProgress.emit(Logger.INFO, u"=> Fin du chargement <=" )
 		except Exception as e:

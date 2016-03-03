@@ -177,13 +177,18 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         filterWhere = self.UI_whereEditable.text()
         if filterWhere == '':
             self.UI_whereEditable.setStyleSheet('QLineEdit { background-color: %s }' % '#ffffff')
-            return
-
-        exp = QgsExpression(filterWhere)
-        if exp.hasParserError() == True:
-            self.UI_whereEditable.setStyleSheet('QLineEdit { background-color: %s }' % '#f6989d')
         else:
-            self.UI_whereEditable.setStyleSheet('QLineEdit { background-color: %s }' % '#c4df9b')
+            self.UI_whereEditable.setStyleSheet('QLineEdit { background-color: %s }' % '#AEEEEE')
+            
+        """
+        Doesn't work with the new OGR type date : cast("FieldDAte" as character) > 'yyy-mm-dd'
+        """
+        # exp = QgsExpression(filterWhere)
+        # print exp.parserErrorString()
+        # if exp.hasParserError() == True:
+        #     self.UI_whereEditable.setStyleSheet('QLineEdit { background-color: %s }' % '#f6989d')
+        # else:
+        #     self.UI_whereEditable.setStyleSheet('QLineEdit { background-color: %s }' % '#c4df9b')
 
 
     def check_state_map_name(self):
@@ -305,7 +310,8 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
                 self.UI_taxonLayer.itemData(self.UI_taxonLayer.currentIndex()), 
                 self.UI_iterationField.currentText(),
                 self.UI_descriptionField.currentText(),
-                self.UI_whereEditable.text()
+                self.UI_whereEditable.text(),
+                self.check_isString(self.UI_iterationField.currentText(), self.UI_taxonLayer.itemData(self.UI_taxonLayer.currentIndex()))
                 )
 
             self.dia = PlantMapProgress(myLongTask, externalProcess)
@@ -459,7 +465,7 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
             self.UI_thesaurusISO.currentText(),
             self.UI_thesaurusInspire.currentText(),
             self.pme.parsingKeyWords(self.UI_keywords.text()),
-            self.UI_contact.text(),
+            self.UI_contact.text(),#TODO, changer dans l'UI par UI_contactInspire
             self.UI_dataOwner.text(),
             self.UI_genealogyData.text(),
             self.UI_cbnManager.text(),
@@ -511,7 +517,7 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         self.UI_thesaurusInspire.findData(indexInspire)
 
         self.UI_keywords.setText(','.join(self.projectXML.keywords))
-        self.UI_contact.setText(self.projectXML.contact)
+        self.UI_contact.setText(self.projectXML.contactInspire)
         self.UI_dataOwner.setText(self.projectXML.dataOwner)
         self.UI_genealogyData.setText(self.projectXML.genealogyData)
         self.UI_cbnManager.setText(self.projectXML.cbnManager)
@@ -576,8 +582,8 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         """
         This method check if the export file has been filled
         """
-        if self.UI_exportPath.text() == '' or self.UI_exportPath.validator().validate(self.UI_storagePath.text(), 0)[0] == QtGui.QValidator.Invalid:
-            self.error_message("Veuillez sélectionner un chemin (les dossiers ne peuvent contenir que des caractères du type : [a-zA-Z0-9])")
+        if self.UI_exportPath.text() == '' or self.UI_exportPath.validator().validate(os.path.basename(os.path.normpath(self.UI_exportPath.text())), 0)[0] == QtGui.QValidator.Invalid:
+            self.error_message("Veuillez sélectionner un chemin (le dossier final ne peut contenir que des caractères du type : [a-zA-Z0-9])")
             return
         if not os.path.exists(self.UI_exportPath.text() + '/metadata'):
             self.error_message("Votre dossier ne contient pas de dossier 'metadata'")
@@ -599,11 +605,16 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         if inputTaxonID == '': #Pas de retourne dans ce cas la !
             self.error_message("Veuillez indiquer un ID de taxon")
         else:
-            descriptionFeature = self.pme.get_description(inputTaxonID,layer,iterationField,descriptionField, whereEditable)
+            #If the taxon name have a qote, you need to double qote (for the filter)
+            newTaxon = inputTaxonID.replace("'", "''")
+            if self.check_isString(self.UI_iterationField.currentText(), self.UI_taxonLayer.itemData(self.UI_taxonLayer.currentIndex())) == True:
+                newTaxon = "'" + newTaxon + "'"
+            descriptionFeature = self.pme.get_description(newTaxon,layer,iterationField,descriptionField, whereEditable)
+
             if descriptionFeature != None:
-                self.add_Taxon_To_Board(inputTaxonID,descriptionFeature,"OK")
+                self.add_Taxon_To_Board(newTaxon,descriptionFeature,"OK")
             else:
-                self.add_Taxon_To_Board(inputTaxonID,descriptionFeature,"NOK")
+                self.add_Taxon_To_Board(newTaxon,descriptionFeature,"NOK")
 
 
             """
@@ -684,10 +695,10 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         taxonBoardCount = self.get_size()
 
         # Add ' ' or not according to the type of the field
-        concatTaxon = self.check_type(self.UI_iterationField.currentText(),
-            self.UI_taxonLayer.itemData(self.UI_taxonLayer.currentIndex()),
-            taxonID)
-
+        # concatTaxon = self.check_type(self.UI_iterationField.currentText(),
+        #     self.UI_taxonLayer.itemData(self.UI_taxonLayer.currentIndex()),
+        #     taxonID)
+        concatTaxon = taxonID
         #Test if a taxon is already in the list of taxon
         for item, v in enumerate(self.taxonList):
             if v[0] == concatTaxon:
@@ -776,6 +787,20 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
             return "'"+taxonID+"'"
         else:
             return taxonID
+
+    def check_isString(self,iterationField,layer):
+        """
+            This method check if the field of iteration is a string and put quote at the start & end of the taxonID to request the layer
+            :params iterationField: field of iteration
+            :params layer: layer which has been selected by the user
+            :params taxonID: represents the id taxon extract from the iterationField 
+            :returns: return the taxon with quote if iterationField is a string type or without if not
+        """
+        iterationFieldType = layer.pendingFields().field(iterationField).type()
+        if iterationFieldType == 10:
+            return True
+        else:
+            return False
 
 
 

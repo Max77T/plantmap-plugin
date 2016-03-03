@@ -34,20 +34,21 @@ class deepValidation(PlantMapThreadInterface):
 			#Temporary list of taxons
 			myListTaxon = []
 			#Test if user filled the whereeditable field
-			if self.whereEditable != '':
-				self.whereEditable = " AND " + self.whereEditable
+			self.whereEditableWithAnd = self.whereEditable
+			if self.whereEditableWithAnd != '':
+				self.whereEditableWithAnd = " AND " + self.whereEditable
 
 			#Iterating over each taxon that the user put into the list to generate
 			for taxon in self.taxonList:
-				self.timerNewTurn()                
+				self.timerNewTurn()
 				self.timerNotify()
 				if(self.isKilled() == True):
 					break
 				#Remove the quoto at the begining and the end of taxon's string
-				newTaxon = filter(lambda x: x != "'", taxon[0])
+				#newTaxon = filter(lambda x: x != "'", taxon[0])
 				if taxon[1] == None:
 					#Make our own filter on the layer
-					filterLayer = str(self.fieldName) +" = "+ taxon[0] + self.whereEditable
+					filterLayer = str(self.fieldName) +" = "+ taxon[0] + self.whereEditableWithAnd
 	                #Apply the filter
 					result = QgisUtils.set_subsetstring(self.layer, filterLayer)
 					if result == False:
@@ -55,12 +56,12 @@ class deepValidation(PlantMapThreadInterface):
 					#Get the description of the taxon according to the parameters
 					desc = self.pme.get_description(taxon[0],self.layer,self.fieldName,self.description,self.whereEditable)
 					if desc != None:
-						t = (newTaxon, desc, "OK")
+						t = (taxon[0], desc, "OK")
 						myListTaxon.append(t)
 					else:
-						myListTaxon.append((newTaxon, desc, "NOK"))
+						myListTaxon.append((taxon[0], desc, "NOK"))
 				else:
-					myListTaxon.append((newTaxon, taxon[1], "OK"))
+					myListTaxon.append((taxon[0], taxon[1], "OK"))
 			
 			self.resultTaxonList = myListTaxon
 			self.logProgress.emit(Logger.INFO, u"=> Fin du filtrage <=" )

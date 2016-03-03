@@ -29,7 +29,7 @@ class plantMapXML:
 		metadatas = [
 		("thesaurusISO",project.thesaurusISO),
 		("thesaurusInspire",project.thesaurusInspire),
-		("contact",project.contact),
+		("contactInspire",project.contactInspire),
 		("dataOwner",project.dataOwner),
 		("genealogyData",project.genealogyData),
 		("cbnManager",project.cbnManager),
@@ -60,7 +60,7 @@ class plantMapXML:
 
 		# Path of output file
 		path = os.path.dirname(__file__)
-		outfile = codecs.open(path+"/project/"+project.name+".xml",'w',"utf-8")
+		outfile = codecs.open(path+"/project/"+ unicode(project.name).encode("utf-8") +".xml",'w',"utf-8")
 
 		tree = self.prettify(projectXML)	
 		#Writing of the xml file

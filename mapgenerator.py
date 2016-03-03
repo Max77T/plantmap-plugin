@@ -216,6 +216,7 @@ class GeneratorMap(PlantMapThreadInterface):
         metadata.email = self.get_value_from_metadata("contactEmail")
         metadata.projectDescription = self.get_value_from_metadata("description")
         metadata.projectName = self.get_value_from_metadata("projectName")
+        metadata.contactName = self.get_value_from_metadata("contactName")
         metadata.rangeObservationStart = self.get_value_from_metadata("studyStartDate")
         metadata.rangeObservationEnd = self.get_value_from_metadata("studyEndDate")
         metadata.dataOwner = self.get_value_from_metadata("dataOwner")
@@ -226,7 +227,7 @@ class GeneratorMap(PlantMapThreadInterface):
         metadata.thesaurusINSPIRE = self.get_value_from_metadata("thesaurusInspire")
         metadata.keywords = []
         metadata.keywords = [val.strip() for val in self.get_value_from_metadata("keywords").split(',')]
-        metadata.contact = self.get_value_from_metadata("contact")
+        metadata.contactInspire = self.get_value_from_metadata("contactInspire")
         metadata.cbnManager = self.get_value_from_metadata("cbnManager")
         metadata.updateFrequency = self.get_value_from_metadata("updateFrequency")
         metadata.usageLimit = self.get_value_from_metadata("usageLimit")

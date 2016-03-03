@@ -55,7 +55,6 @@ class plantMapEngine():
 		"""
 		if whereEditable != '':
 			whereEditable = " AND " + whereEditable
-
 		#Create the expression to request to get the description of a taxon
 		exp = QgsExpression(str(iterationField) + " = " + taxonID + whereEditable)
 		#Transform expression to a request
@@ -106,7 +105,7 @@ class plantMapEngine():
 		"""
 		pxml = plantMapXML()
 		path = self.project_path()
-		filePath = str(path+projectSelected)
+		filePath = path+ unicode(projectSelected).encode("utf-8")
 		xmlFile = pxml.parse_xml(filePath+'.xml')
 		return xmlFile
 

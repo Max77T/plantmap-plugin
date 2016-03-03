@@ -19,7 +19,7 @@ class Project:
 		thesaurusISO,
 		thesaurusInspire,
 		keywords,
-		contact,
+		contactInspire,
 		dataOwner,
 		genealogyData,
 		cbnManager,
@@ -39,7 +39,7 @@ class Project:
 		self.thesaurusISO = thesaurusISO
 		self.thesaurusInspire = thesaurusInspire
 		self.keywords = keywords # List of keywords
-		self.contact = contact
+		self.contactInspire = contactInspire
 		self.dataOwner = dataOwner
 		self.genealogyData= genealogyData
 		self.cbnManager = cbnManager
