@@ -2,10 +2,10 @@
 Plugin Builder Results
 
 Your plugin PlantMap was created in:
-    C:\Users\max\.qgis2\python\plugins\PlantMap
+    C:\Users\PlantMap\\.qgis2\python\plugins\PlantMap
 
 Your QGIS plugin directory is located at:
-    C:/Users/max/.qgis2/python/plugins
+    C:/Users/PlantMap/.qgis2/python/plugins
 
 What's Next:
 
