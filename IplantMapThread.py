@@ -1,7 +1,7 @@
 # coding: utf8
 
 from PyQt4.QtCore import QThread, pyqtSignal
-
+from PyQt4.QtCore import *
 from timer import *
 
 class PlantMapThreadInterface(QThread):
@@ -13,6 +13,7 @@ class PlantMapThreadInterface(QThread):
 			Represent the main work of the thread
 			TODO : Need to implement this method
 		"""
+		print "pas normal"
 		pass
 
 	def getResult(self):
@@ -60,7 +61,7 @@ class PlantMapThreadInterface(QThread):
 		"""
 			Represent the end of the timer
 		"""
-		self.notifyProgress.emit(0, 100)
+		self.notifyProgress.emit(0, 110)
 
 	def timerNewTurn(self):
 		"""

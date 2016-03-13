@@ -11,11 +11,13 @@ from plantmap_engine import *
 from IplantMapThread import *
 from logger import *
 import csv
+# from manageUIListTaxon import ManageUIListTaxon
 
 class loadCSV(PlantMapThreadInterface):
 	"""
 		This class implement PlantMapThreadInterface which allow him to load a csv and extract the data trough a thread
 	"""
+	addTaxonSignal = pyqtSignal(str, str, str)
 
 	def __init__(self, csvFile, layer, iterationField, descriptionField, whereEditable, fieldIsString = False):
 		super(loadCSV, self).__init__()
@@ -27,6 +29,7 @@ class loadCSV(PlantMapThreadInterface):
 		self.whereEditable = whereEditable
 		self.pme = plantMapEngine()
 		self.fieldIsString = fieldIsString
+		# self.manageUIList = ManageUIListTaxon()
 
 
 	def run(self):
@@ -61,8 +64,12 @@ class loadCSV(PlantMapThreadInterface):
 						descriptionFeature = self.pme.get_description(taxon_unicode,self.layer,self.iterationField,self.descriptionField, self.whereEditable)
 						if descriptionFeature != None:       
 							self.listTaxon.append((taxon_unicode,descriptionFeature,"OK"))
+							self.addTaxonSignal.emit(taxon_unicode,descriptionFeature,"OK")
+							# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"OK")
 						else:
 							self.listTaxon.append((taxon_unicode,descriptionFeature,"NOK"))
+							# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"NOK")
+							self.addTaxonSignal.emit(taxon_unicode,descriptionFeature,"NOK")
 				self.timerEnd()
 				self.logProgress.emit(Logger.INFO, u"=> Fin du chargement <=" )
 		except Exception as e:
