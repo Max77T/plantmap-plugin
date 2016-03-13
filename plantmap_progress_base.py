@@ -41,5 +41,5 @@ class Ui_PlantMapDialogBase(object):
     def retranslateUi(self, PlantMapDialogBase):
         PlantMapDialogBase.setWindowTitle(QtGui.QApplication.translate("PlantMapDialogBase", "PlantMap : Map Generator", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Retrouvez tous les logs dans le fichier log.txt", None, QtGui.QApplication.UnicodeUTF8))
-        self.UI_Cancel.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        self.UI_Cancel.setText(QtGui.QApplication.translate("PlantMapDialogBase", "Fermer", None, QtGui.QApplication.UnicodeUTF8))
 
