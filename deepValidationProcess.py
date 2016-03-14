@@ -4,12 +4,14 @@ from plantmap_engine import plantMapEngine
 from IplantMapThread import PlantMapThreadInterface
 from logger import *
 from qgis_utils import QgisUtils
+from PyQt4.QtCore import *
 
 class deepValidation(PlantMapThreadInterface):
 	"""
 		This class make a deep research in the input layer to know exactly the status of a taxon.
 		It replaces the subset filter with the input field and each value of the taxon board
 	"""
+	addTaxonSignal = pyqtSignal(str, str, str)
 
 	def __init__(self, layer, fieldName, whereEditable, description, taxonList):
 		super(deepValidation, self).__init__()
@@ -30,7 +32,7 @@ class deepValidation(PlantMapThreadInterface):
 		"""
 		try:
 			#Logger
-			self.logProgress.emit(Logger.INFO, u"=> Début du filtrage avancé <=")
+			self.logProgress.emit(Logger.INFO, u"=> Début du filtrage avancé <=" )
 			#Temporary list of taxons
 			myListTaxon = []
 			#Test if user filled the whereeditable field
@@ -39,6 +41,7 @@ class deepValidation(PlantMapThreadInterface):
 				self.whereEditableWithAnd = " AND " + self.whereEditable
 
 			#Iterating over each taxon that the user put into the list to generate
+
 			for taxon in self.taxonList:
 				self.timerNewTurn()
 				self.timerNotify()
@@ -46,7 +49,7 @@ class deepValidation(PlantMapThreadInterface):
 					break
 				#Remove the quoto at the begining and the end of taxon's string
 				#newTaxon = filter(lambda x: x != "'", taxon[0])
-				if taxon[1] == None:
+				if taxon[1] == None or taxon[1] == "":
 					#Make our own filter on the layer
 					filterLayer = str(self.fieldName) +" = "+ taxon[0] + self.whereEditableWithAnd
 	                #Apply the filter
@@ -57,11 +60,14 @@ class deepValidation(PlantMapThreadInterface):
 					desc = self.pme.get_description(taxon[0],self.layer,self.fieldName,self.description,self.whereEditable)
 					if desc != None:
 						t = (taxon[0], desc, "OK")
+						self.addTaxonSignal.emit(taxon[0], desc, "OK")
 						myListTaxon.append(t)
 					else:
 						myListTaxon.append((taxon[0], desc, "NOK"))
+						self.addTaxonSignal.emit(taxon[0], desc, "NOK")
 				else:
 					myListTaxon.append((taxon[0], taxon[1], "OK"))
+					self.addTaxonSignal.emit(taxon[0], taxon[1], "OK")
 			
 			self.resultTaxonList = myListTaxon
 			self.logProgress.emit(Logger.INFO, u"=> Fin du filtrage <=" )

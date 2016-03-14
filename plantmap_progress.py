@@ -5,7 +5,13 @@ from PyQt4 import QtGui, uic
 from PyQt4.QtGui import QMessageBox
 from logger import *
 from handlers import *
+from PyQt4.QtCore import QThread, pyqtSignal
 import plantmap_progress_base
+from PyQt4.QtCore import *
+
+class Object(QtCore.QObject):
+    def emitSignal(self):
+        self.emit(SIGNAL("aSignal()"))
 
 class PlantMapProgress(QtGui.QDialog, plantmap_progress_base.Ui_PlantMapDialogBase):
 	"""
@@ -14,6 +20,7 @@ class PlantMapProgress(QtGui.QDialog, plantmap_progress_base.Ui_PlantMapDialogBa
 	"""
 
 	logSignal = QtCore.pyqtSignal(int)
+	
 	def __init__(self,threadProcess, threadExternalProcess, pathFileLog=None):
 		QtGui.QDialog.__init__(self)
 		self.setupUi(self)
@@ -69,6 +76,13 @@ class PlantMapProgress(QtGui.QDialog, plantmap_progress_base.Ui_PlantMapDialogBa
 		if time < 0 :
 			self.UI_progressBar.setFormat("Temps restant : < Calcul en cours >         " + str(percent) + " %")
 			return
+		if percent == 110: # This is the end of process
+			self.UI_progressBar.setFormat("100 %")
+			self.UI_progressBar.setValue(100)
+			QMessageBox.information(self,
+			self.trUtf8("Processus"),
+			self.trUtf8("Processus terminée"))
+			return
 		#transforme the second on string understandable 
 		hours = time / 60 / 60 % 24
 		minutes = time / 60 % 60
@@ -83,11 +97,6 @@ class PlantMapProgress(QtGui.QDialog, plantmap_progress_base.Ui_PlantMapDialogBa
 		#And change value of progressbar
 		self.UI_progressBar.setFormat("Temps restant : " + timeTreat + "          " + str(percent) + " %")
 		self.UI_progressBar.setValue(percent)
-
-		if(percent==100):
-			QMessageBox.information(self,
-			self.trUtf8("Processus"),
-			self.trUtf8("Processus terminée"))
 
 
 	def closeEvent(self,event):

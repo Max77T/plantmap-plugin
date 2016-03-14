@@ -56,7 +56,11 @@ from IexternalProcessThread import *
 from loadCSVProcess import loadCSV
 import plantmap_dialog_base #import Ui_PlantMapDialogBase
 
+from manageUIListTaxon import ManageUIListTaxon
+
 class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
+    
+    
     def __init__(self,parent):
         """Constructor"""
         QtGui.QDialog.__init__(self)
@@ -80,6 +84,10 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         self.projectXML = None
         self.fromEdit = False
         self.listMetadataToCreate = []
+
+        self.taxonBoardCount = 0
+        self.manageUIList = ManageUIListTaxon()
+        self.manageUIList.initManager(self.UI_taxonTab)
 
 
         ### ---- Regex for each field --- ###
@@ -184,7 +192,6 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         Doesn't work with the new OGR type date : cast("FieldDAte" as character) > 'yyy-mm-dd'
         """
         # exp = QgsExpression(filterWhere)
-        # print exp.parserErrorString()
         # if exp.hasParserError() == True:
         #     self.UI_whereEditable.setStyleSheet('QLineEdit { background-color: %s }' % '#f6989d')
         # else:
@@ -265,7 +272,8 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
             Make the deep validation
         """
         # Check if taxon board is empty
-        if self.get_size() < 0:
+        if len(self.manageUIList.getListOfTaxon()) < 0:
+        # if self.get_size() < 0:
             return
         else:
             #Put the process into a thread worker
@@ -274,20 +282,19 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
                 self.UI_iterationField.currentText(),
                 self.UI_whereEditable.text(),
                 self.UI_descriptionField.currentText(),
-                self.taxonList)
+                self.manageUIList.getListOfTaxon())
+
+            #remove all the active taxon in the UI liste
+            self.validate_remove_all()
+
+            self.myLongTask.addTaxonSignal.connect(self.manageUIList.addTaxon)
             #Initialize the thread
             self.dia = PlantMapProgress(self.myLongTask, externalProcess)
-            #Run the threah
+            #Run the thread
             self.dia.exec_()
 
-            # Get the result of the thread
-            listResult = externalProcess.taxonList
-            # Remove the current content of the taxon board
-            self.validate_remove_all()
-            # Put the new taxon from the deep validation with their exact description
-            for taxonTuple in listResult:
-                self.add_Taxon_To_Board(taxonTuple[0], taxonTuple[1], taxonTuple[2])
-
+            #Add the new taxon with new description 
+            self.refresh_taxon_board()
 
     def stockage_file_dialog(self):
         """
@@ -314,12 +321,13 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
                 self.check_isString(self.UI_iterationField.currentText(), self.UI_taxonLayer.itemData(self.UI_taxonLayer.currentIndex()))
                 )
 
+            myLongTask.addTaxonSignal.connect(self.manageUIList.addTaxon)
+
             self.dia = PlantMapProgress(myLongTask, externalProcess)
             self.dia.exec_()
 
             listResult = externalProcess.taxonList
-            for taxonTuple in listResult:
-                self.add_Taxon_To_Board(taxonTuple[0], taxonTuple[1], taxonTuple[2])
+            self.refresh_taxon_board()
 
     def export_file_dialog(self):
         """
@@ -612,9 +620,11 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
             descriptionFeature = self.pme.get_description(newTaxon,layer,iterationField,descriptionField, whereEditable)
 
             if descriptionFeature != None:
-                self.add_Taxon_To_Board(newTaxon,descriptionFeature,"OK")
+                self.new_add_taxon_to_board(newTaxon,descriptionFeature,"OK")
+                self.refresh_taxon_board()
             else:
-                self.add_Taxon_To_Board(newTaxon,descriptionFeature,"NOK")
+                self.new_add_taxon_to_board(newTaxon,descriptionFeature,"NOK")
+                self.refresh_taxon_board()
 
 
             """
@@ -626,11 +636,7 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         """
             This method check if the board is empty, if not remove all the taxon
         """
-        if self.get_size() > 0:
-            for i in reversed(range(self.UI_taxonTab.rowCount())):
-                self.UI_taxonTab.removeRow(i)
-            del self.taxonList[:]
-        else:
+        if self.manageUIList.removeAll() == False:
             self.error_message("Le tableau de taxons est déjà vide")
 
     def validate_map_generation(self):
@@ -662,7 +668,8 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
             return
 
         # Create the list of taxon to generate (without the incorrect taxon)
-        listToGenerate = filter(lambda taxon: taxon[1] != None,self.taxonList)
+        listToGenerate = filter(lambda taxon: taxon[1] != None,self.manageUIList.getListOfTaxon())
+
         # Put into a genData object all data for the generation
         genData = generationData(self.UI_projectSelection,
             self.UI_mapName,
@@ -681,97 +688,19 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         self.generate(genData)
         
 
-    def add_Taxon_To_Board(self,taxonID,description,status):
-        """
-        Add a taxon to the list from the text input previously tested
-        :param taxonID: the id taxon
-        :param description: description of a taxon from the field descriptionField
-        :param status: put a status of a taxon if present or not
-        :returns: True, if a taxon has been added to the list and false if not
-        """
+    def new_add_taxon_to_board(self,taxonID,description,status):
 
-        # Get the taxon list
-        taxonBoard = self.UI_taxonTab
-        taxonBoardCount = self.get_size()
-
-        # Add ' ' or not according to the type of the field
-        # concatTaxon = self.check_type(self.UI_iterationField.currentText(),
-        #     self.UI_taxonLayer.itemData(self.UI_taxonLayer.currentIndex()),
-        #     taxonID)
-        concatTaxon = taxonID
-        #Test if a taxon is already in the list of taxon
-        for item, v in enumerate(self.taxonList):
-            if v[0] == concatTaxon:
-                QMessageBox.warning(self,
-                self.trUtf8("Intégration d'un taxon à la liste"), #indiquer plutôt que le taxon est déjà dans la liste ?
-                self.trUtf8(str(concatTaxon)+" déjà présent dans le tableau"))
-                return False
+        self.manageUIList.addTaxon(taxonID,description,status)
 
 
-        taxonBoard.setSortingEnabled(False)
-        # Set the properties of the taxon list
-        taxonBoard.setRowCount(taxonBoardCount+1)
-        taxonBoard.setColumnCount(4)
-
+    def refresh_taxon_board(self):
+        doublon = self.manageUIList.refreshTaxonTab()
         # Set the input text to empty
         self.UI_taxonID.setText(u'')
-
-        #Add the new taxon item to the table
-        newTaxon = QTableWidgetItem()
-        newTaxon.setFlags( Qt.ItemIsSelectable | Qt.ItemIsEnabled )
-        newTaxon.setData( Qt.EditRole,concatTaxon )
-        taxonBoard.setItem(taxonBoardCount,0,newTaxon)
-
-
-        # Add the description from the field of the layer
-        newDescription = QTableWidgetItem()
-        newDescription.setFlags( Qt.ItemIsSelectable | Qt.ItemIsEnabled )
-        newDescription.setData(Qt.EditRole,description)
-        taxonBoard.setItem(taxonBoardCount,1,newDescription)
-
-        # Add the status from the result of the check in layer source
-        newStatus = QTableWidgetItem()
-        newStatus.setFlags( Qt.ItemIsSelectable | Qt.ItemIsEnabled )
-        newStatus.setData(Qt.EditRole,status)
-        taxonBoard.setItem(taxonBoardCount,2,newStatus)
-
-        # Add a remove button in the taxon board
-        btnRemove = QPushButton(taxonBoard)
-        btnRemove.setText("Supprimer")
-        # brnRemove.setFlags( Qt.ItemIsSelectable | Qt.ItemIsEnabled )
-        # brnRemove.setData(Qt.EditRole,status)
-        btnRemove.clicked.connect(self.handler_remove_button)
-        taxonBoard.setCellWidget(taxonBoardCount,3,btnRemove)
-        
-
-        taxonBoard.setSortingEnabled(True)
-        # Add taxon
-        t =  (concatTaxon,description)
-        self.taxonList.append(t)
-
-        return True
-
-    def get_size(self):
-        """
-            Get the size of the taxonList
-            :returns: The size of the tab
-        """
-        taxonBoardCount = self.UI_taxonTab.rowCount()
-        return taxonBoardCount
-
-    def handler_remove_button(self):
-        """ 
-        Remove a taxon thanks to the button in the taxon board
-        """
-        # Remove the taxon from the list
-        #button = QtGui.qApp.focusWidget()
-        button = self.sender()
-        # Add the process to the remove button of the taxon board for each taxon
-        index = self.UI_taxonTab.indexAt(button.pos())
-        output = filter(lambda x: x[0]!=self.UI_taxonTab.item(index.row(),0).text(),self.taxonList)
-        self.taxonList = output
-        self.UI_taxonTab.removeRow(index.row())
-        self.UI_taxonTab.viewport().update()
+        if len(doublon) > 0:
+            QMessageBox.warning(self,
+                self.trUtf8("Intégration d'un taxon à la liste"), #indiquer plutôt que le taxon est déjà dans la liste ?
+                self.trUtf8(str(doublon)+" déjà présent dans le tableau"))
     
 
     def check_type(self,iterationField,layer,taxonID):
@@ -803,39 +732,6 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
             return False
 
 
-
-    def remove_Taxon_From_Board(self):
-        """
-        Remove a taxon from the list if a row is selected
-        When the users clicks on the remove button
-        """
-
-        #Get selected lines
-        taxonBoard = self.UI_taxonTab   
-        sm = taxonBoard.selectionModel()
-        lines = sm.selectedRows()
-        if not lines or len(lines) != 1:
-            return
-
-        row = lines[0].row()
-
-        #Get taxon id
-        taxonID = taxonBoard.item(row,0).data(Qt.EditRole)
-
-        # Remove the taxon from the list
-        self.taxonList.remove(taxonID)
-
-        # Update project
-        p = QgsProject.instance()
-        p.writeEntry( 'PluginPlantMap', 'taxonList', self.taxonList )
-        p.setDirty( True )
-
-        # Remove selected taxons
-        taxonBoard = self.UI_taxonTab
-        taxonBoard.removeRow(taxonBoard.currentRow())
-        taxonBoard.setRowCount(self.get_size()-1)
-    
-
     def error_message(self,message):
         """
         This method display a message to the user with the origin of the error
@@ -853,7 +749,6 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         """
             Launch the generation process through a thread
         """
-        
         externalProcess = generatorMapExternalProcess(genData.layer)
         self.myLongTask = GeneratorMap(genData, self.listMetadataToCreate)
         self.dia = PlantMapProgress(self.myLongTask, externalProcess, genData.storagePath.text())

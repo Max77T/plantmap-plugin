@@ -2,6 +2,9 @@
 
 from plantmap_engine import plantMapEngine
 from qgis_utils import QgisUtils
+from manageUIListTaxon import ManageUIListTaxon
+from logger import *
+
 
 class externalProcessThreadInterface:
 	"""
@@ -32,6 +35,8 @@ class loadCSVExternalProcess(externalProcessThreadInterface):
 			Get the list of taxon from the loading 
 		"""
 		self.taxonList = result
+
+
 
 
 class deepExternalProcessValidation(externalProcessThreadInterface):
