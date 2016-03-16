@@ -64,12 +64,12 @@ class loadCSV(PlantMapThreadInterface):
 						descriptionFeature = self.pme.get_description(taxon_unicode,self.layer,self.iterationField,self.descriptionField, self.whereEditable)
 						if descriptionFeature != None:       
 							self.listTaxon.append((taxon_unicode,descriptionFeature,"OK"))
-							self.addTaxonSignal.emit(taxon_unicode,descriptionFeature,"OK")
+							self.addTaxonSignal.emit(unicode(taxon_unicode),unicode(descriptionFeature),"OK")
 							# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"OK")
 						else:
 							self.listTaxon.append((taxon_unicode,descriptionFeature,"NOK"))
 							# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"NOK")
-							self.addTaxonSignal.emit(taxon_unicode,descriptionFeature,"NOK")
+							self.addTaxonSignal.emit(unicode(taxon_unicode),unicode(descriptionFeature),"NOK")
 				self.timerEnd()
 				self.logProgress.emit(Logger.INFO, u"=> Fin du chargement <=" )
 		except Exception as e:

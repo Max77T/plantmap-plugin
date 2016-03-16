@@ -698,9 +698,18 @@ class PlantMapDialog(QtGui.QDialog, plantmap_dialog_base.Ui_PlantMapDialogBase):
         # Set the input text to empty
         self.UI_taxonID.setText(u'')
         if len(doublon) > 0:
-            QMessageBox.warning(self,
-                self.trUtf8("Intégration d'un taxon à la liste"), #indiquer plutôt que le taxon est déjà dans la liste ?
-                self.trUtf8(str(doublon)+" déjà présent dans le tableau"))
+            msg = QtGui.QMessageBox()
+            msg.setWindowTitle("Taxon en doublon dans la liste")
+            msg.setText(unicode("Certains taxons sont déjà présent dans la liste de taxon à traiter", "utf-8"))
+            msg.setInformativeText(str(len(doublon)) + " doublon(s) ne sont pas pris en compte")
+            msg.setDetailedText(''.join(unicode(e)+"\n" for e in doublon) )
+            msg.setStandardButtons(QtGui.QMessageBox.Ok)
+            msg.setDefaultButton(QtGui.QMessageBox.Ok)
+            ret = msg.exec_()
+
+            # QMessageBox.warning(self,
+            #     self.trUtf8("Taxon en doublon dans la liste"), #indiquer plutôt que le taxon est déjà dans la liste ?
+            #     self.trUtf8(" déjà présent dans le tableau"))
     
 
     def check_type(self,iterationField,layer,taxonID):
