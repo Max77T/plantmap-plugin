@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to plantmap's documentation!
-====================================
+Plugin QGIS Plantmap
+======================================
 
 Contents:
 
@@ -14,6 +14,8 @@ Contents:
    introduction
    pour_les_utilisateurs
    pour_les_developpeurs
+   evolutions_envisageables
+   bugs_connus
 
 Indices and tables
 ==================
@@ -21,4 +23,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

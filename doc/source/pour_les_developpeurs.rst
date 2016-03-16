@@ -62,7 +62,114 @@ Installation :
 Ensuite, lors d’un changement dans le code du plugin, il suffit de sélectionner le plugin modifié en cliquant sur l’icône du plugin reloader.
 
 ---------------------------------
-Organisation générale du plugin
+Fonctionnement du plugin
+---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Modal et traitement long (Thread)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Afin d’exécuter des traitements longs, nous utilisons dans notre plugin une modal prenant en paramètre une Thread qui sera exécutée au sein de la modal. Nous utilisons cette organisation dans trois conditions : 	
+  * Lors de l’importation d’un fichier CSV
+  * Lors de la vérification avancée de présence d’un taxon
+  * Lors de la génération des cartes
+
+Le traitement long est, dans les trois conditions, arrêtable via le bouton “Cancel” de la modal. Si le traitement long n’est pas fini, la modal proposera de l’arrêter. L'arrêt d’un thread peut demander quelques secondes.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Worker
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Un Worker correspond à la classe abstraite à utiliser afin de mettre en place une Thread utilisable par la modal. Cette classe abstraite contient des arguments et des méthodes déjà misent en places et deux méthodes à implémenter afin de mettre en place un Worker spécifique, “run()” et “getResult()”. Le Worker est situé dans le fichier IplantMapThread.py, classe PlantMapThreadInterface. Il est nécessaire d’étendre cette classe afin de créer et mettre en place son propre Worker.
+
+L’arrêt du Worker est en mode passif, cela permet au développeur de contrôler et de sécuriser l’arrêt de la Thread. Afin de tester si la demande d’arrêt de la Thread est réalisée, il est nécessaire de tester la valeur retournée par la méthode “isKilled()” (retourne True si la demande est réalisée). Cette méthode peut, par exemple, être testée à chaque tour de boucle afin de sortir de la boucle en toute sécurité.
+
+Afin de loguer un message au sein d’un thread, il est interdit d’utiliser directement la classe Logger pour des raisons de concurrences et d’interactions avec l’interface graphique. Afin de loguer un message au sein d’un worker, utilisez la méthode suivante : 
+
+==> self.logProgress.emit(Logger.[LEVEL], u”[message]”)
+
+Par exemple : self.logProgress.emit(Logger.INFO, u"Traitement en cours ")
+
+Afin de mettre à jour la barre de progression de la modal, un Timer est livré avec la classe abstraite (Timer.py, classe Timer). Le Timer doit être initialisé au début du traitement long grâce à la méthode timerInit, prenant en paramètre le nombre d’opérations à réaliser. Le Timer doit ensuite être mis à jour à chaque opération réalisée grâce à la méthode timerNewTurn() (A chaque tour de boucle par exemple). Enfin, la méthode timerEnd() permet d’indiquer la fin du traitement au Timer.
+
+Méthodes à implémenter :
+  * run() :  Obligatoire, correspond à l’implémentation du code qui sera exécuter par le thread
+  * getResult() : Facultatif, permet de retourner un résultat une fois le traitement du thread fini.
+
+Méthodes du Worker utilisées par la modal (déjà implémentées) :
+  * kill() : Permet de changer l’état du paramètre “killed” à True
+
+Méthodes à utiliser au sein de la méthode run() (déjà implémentées) :
+  * isKilled() : Méthode retournant True si la demande d’arrêt du Thread est réalisée (A tester régulièrement afin de pouvoir gérer l’arrêt du Thread)
+  * timerInit(int) : Méthode permettant d’initialiser le timer. Prend en paramètre le nombre total d’opérations à réaliser
+  * timerNewTurn() : Permet d’indiquer qu’une opération est réalisée et mettre à jour l’état du timer
+  * timerEnd() : Permet d’indiquer que toutes les opérations sont réalisées
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Logger
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Le Logger permet d’historiser toutes les informations liées au plugin et à la génération des cartes. Le logger est un singleton, la même instance est donc utilisable partout dans le plugin. Les trois méthodes “debug”, “info” et “error” permettent d’historiser un message suivant sa priorité. 
+Les deux méthodes “addOuput” et “removeOutput” permettent d’ajouter ou supprimer des handlers. En effet, le logger est basé sur un système d’inscription via des handler. Un handler permet de décrire de quelle manière sera traité un logue. Par exemple, le handler FileHandler décrit la manière dont tous les logs seront redirigés vers un fichier, le handler TextEditandler décrit la manière dont tous les logs seront redirigés vers un QTextEdit.
+Un handler est instanciable grâce à la classe abstraite “HandlerInterface” au sein du fichier handlers.py. Un handler doit être ensuite ajouté au Logger afin que le logger le prenne en compte.
+ 
+-------------------------------------
+Les classes fonctionnelles du plugin
+-------------------------------------
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Vérification avancée
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contient la classe deepValidation qui a pour rôle de réaliser une vérification avancée et permet de outre passé les possibles filtres indiqués sur la couche QGIS afin de contrôler si un taxon est présent en base ou non. Cette classe étend la classe PlantMapThreadInterface, c’est un Worker qui sera exécuté dans la modal et répond donc aux exigences citées précédemment.
+
+Cette fonction suit les directives suivantes :
+  * Récupère et efface le filtre de la couche.
+  * Test pour toutes les IDs présents dans la liste de taxons si celui-ci est présent dans la couche.
+
+Enfin, la fonction remet en place le filtre.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Chargement CSV
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contient la classe loadCSV qui a pour rôle de charger un fichier CSV contenant la liste des taxons à traiter. Cette classe étend la classe PlantMapThreadInterface, c’est un Worker qui sera exécuté dans la modal et répond donc aux exigences citées précédemment.
+La liste de taxons doit être présente dans la 1ere colonne du fichier. Les autres colonnes ne seront pas prisent en compte.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Export 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contient la classe Export qui permet de compresser un dossier contenant des images préalablement générées avec le plugin afin de les importer dans la cartothèque via l’onglet de la cartothèque prévu à cette effet.
+Le processus d’export récupère la liste des images et des métadonnées comprises dans le dossier sélectionné puis réalise une intersection afin d’exporter seulement les images ayant des métadonnées et inversement. L’export consiste ensuite en la création d’une archive zip contenant les fichiers résultants de l’intersection.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+qgis_utils.py
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contient les fonctions qgis utilisées à travers le plugin afin de faciliter au mieux un changement de version. Certaines fonctions QGIS peuvent néanmoins se trouver dans certains fichiers.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Generation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Le fichier mapgenerator.py contient la classe GeneratorMap qui a pour rôle de générer la liste de taxons. Cette classe étend la classe PlantMapThreadInterface, c’est un Worker qui sera exécuté dans la modal et répond donc aux exigences citées précédemment.
+
+La classe prend deux paramètres lors de son instanciation : 
+  * genData : Objet contenant toutes les informations relatives à la génération (liste de taxons, composer, layer, dossier de stockage, …). La classe de l’objet genData est située dans le fichier generationData.py, classe generationData.
+  * listMetadataToCreate : Liste contenant toutes les métadonnées liées à un projet. Cette liste est créée à partir du fichier xml représentant un projet.
+
+A l’initialisation, la classe créer un fichier CSV au sein du dossier de stockage comprenant la liste des taxons qui sera générée (fichier réutilisable dans le plugin). La classe créer également un fichier generation_info_[date].json au sein du dossier metadata, ce fichier contient toutes les informations relatives à la génération.
+
+La méthode run() de la classe boucle sur la liste de taxon. Pour chaque taxon, deux parties principales sont réalisées :
+  * Génération de carte : Cette partie contient trois actions importantes :
+  * set_subsetstring(Layer, newFiltre) : Modifie et adapte le filtre de la couche afin de ne récupérer que les taxons en cours de traitements
+  * composer_printPageAsRaster(Composer) : Met à jour le composer
+  * composer_saveImage(path, ext) : Sauvegarde le composer
+  * Génération des métadonnées : Cette partie contient trois actions importantes :
+  * populate_json_object(taxon, description) : Créer un objet JSON comprenant toutes les métadonnées pour un taxon
+  * MetadataWriter(fileName, path, json) : Prépare l’écriture du fichier JSON
+  * process() : sauvegarde les métadonnées sur le disque.
+
+
+Si, lors de la génération, la connexion à la couche de taxons en base de données est perdue, le plugin sera bloqué en attendant de retrouver la connexion. Même si l’utilisateur clique sur “Cancel” et souhaite couper le thread, le plugin sera en attente et ne répondra plus temps que la connexion ne sera pas retrouvée. Cet effet est du à QGIS qui ne propose pas de TimeOut sur les méthodes suivantes :
+  * setSubsetString (sur le layer taxon)
+  * printPageAsRaster (sur le composer)
+  
+---------------------------------
+L'organisation des fichiers
 ---------------------------------
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -128,7 +235,7 @@ deepValidationProcess.py     permet de vérifier la présence d'un taxon dans le
 export.py                    permet de créer un zip avec les cartes et les métadonnées                                                                                      Export(__init__, process, fill_list_of_img, fill_list_of_metadata, intersect_list_image_metadata, createZip)
 generationData.py            constructeur des paramètres de production de la carte (metadata of a generation)                                                               generationData(__init__)
 IexternalProcessThread.py    permet de gerer le lien entre le pré et post traitement lors des actions d'import de CSV,  de recherche avancée et de production de cartes     externalProcessThreadInterface(before, after),  loadCSVExternalProcess (__init__, before, after),  deepExternalProcessValidation(__init__, before, after),  generatorMapExternalProcess(__init__, before, after)
-IplantMapThread.py           This class simulate an interface that a thread need to implement                                                                               PlantMapThreadInterface
+IplantMapThread.py           Gestion du Worker                                                                                                                              PlantMapThreadInterface
 loadCSVProcess.py            permet de charger une liste de taxon                                                                                                           loadCSV(__init__, run, getResult)
 Logger.py                    This class Logger propose to log with 3 level for 3 output Level : DEBUG | INFO | ERROR
                              The Logger used handlers. You can create handlers and added this with class Handlers                                                           Logger(__new__, __init__, addOutput, removeOutput, debug, info, error)
@@ -164,7 +271,7 @@ Développement et déploiement
 ---------------------------------
   * Récupérez les sources sur le dépot Github du projet : https://github.com/Max77T/plantmap-plugin
   * Compilez le plugin en utilisant pyrcc4
-  * Pour être identifié par QGIS, le plugin doit être placé dans le dossier C:\Users\[nom_de_l_utilisateur]\.qgis2\python\plugins (sous windows) ou .qgis2/python/plugins/ (sous linux)
+  * Pour être identifié par QGIS, le plugin doit être placé dans le dossier C:/Users/[nom_de_l_utilisateur]/.qgis2/python/plugins/ (sous windows) ou .qgis2/python/plugins/ (sous linux)
   * Réalisez les modifications souhaitées
   
    * Modifier le fichier d'implémentation : plantmap.py
@@ -189,7 +296,13 @@ Il faut modifier le fichier metadata.txt présent dans les sources du plugin.
 Compiler les intefaces
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Pour modifier une interface (UI), il est recommandé d’utiliser QtCreator4 qui permet à l’aide de drag and drop de widget de modifier l’interface.
-La modification d’une ui nécessite une recompilation à l’aide de la commande suivante::
+A chaque modification de l’interface graphique via QTCreator, il est donc nécessaire de compiler le fichier .ui. Afin de compiler un fichier .ui en .py, nous utilisons la commande suivante ::
 	
 	pyuic4 plantmap_dialog_base.ui -o plantmap_dialog_base.py
 
+Deux classes python instancies et gères ces deux interfaces, respectivement : 
+  * plantmap_dialog.py
+  * plantmap_progress.py
+
+Les interfaces sont passées en paramètres de classe.
+Nous avons préfixés tous les objets graphiques par “UI_[nomDeLObjet] afin de les différencier facilement au sein du code python.
