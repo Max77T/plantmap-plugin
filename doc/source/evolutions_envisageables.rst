@@ -3,6 +3,14 @@ Evolutions envisageables
 =========================
 Avec la prise de recul d’après développement et les réunions avec la FCBN, nous avons envisagés plusieurs évolutions du plugin :
 
+---------------------------------------------
+Chargement CSV et vérification approfondie
+---------------------------------------------
+Le chargement est beaucoup trop lent (45minute pour charger une liste de 9000 taxons, 400Ko)
+La vérfication l'est encore plus.
+Une piste : 
+http://softwarerecs.stackexchange.com/questions/7463/fastest-python-library-to-read-a-csv-file
+
 ---------------------------
 Interface Graphique
 ---------------------------

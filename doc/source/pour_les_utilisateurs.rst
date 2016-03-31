@@ -9,6 +9,7 @@ Cette partie a pour objectif de
 
 La documentation de mise en production proposera une installation multi OS (UNIX et Windows) étant donné la compatibilité de QGIS avec les systèmes précédemment cités. Le déploiement pourra se faire selon les modélités suivantes : Installation depuis le serveur PlantMap (et à terme le répository QGIS, Installation via les sources).
 Le plugin a été testé sur :
+
   * Windows 7 avec QGIS 2.0 (non compatible), 2.8 et 2.12 (nous n’avons pas testé la compatibilité avec les versions intermédiaires)
   * Linux 12.04 avec QGIS 2.12, QGIS 2.14
 
@@ -32,6 +33,7 @@ L’installation via les sources consiste a décompressée les sources dans un d
   * Récupérez les sources sur le dépot Github du projet : https://github.com/Max77T/plantmap-plugin
   * Compilez le plugin en utilisant pyrcc4
   * Pour être identifié par QGIS, le plugin doit être placé dans le dossier C:\Users\[nom_de_l_utilisateur]\.qgis2\python\plugins (sous windows) ou .qgis2/python/plugins/ (sous linux)
+
 Attention, ils est nécessaire de redémarrer QGIS pour que le plugin soit reconnu.
 
 Après avoir lancé QGIS, il se peut que le plugin soit désactivé pour remédier à cela, il faut se rendre dans le menu “Extension”. La checkbox “PlantMap” doit être coché. Une fois coché le plugin sera visible dans la barre des plugins.
