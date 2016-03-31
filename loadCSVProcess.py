@@ -48,6 +48,7 @@ class loadCSV(PlantMapThreadInterface):
 			with open(self.csvFile, 'rb') as csvfile:
 				#Spamreader represent the cells in the first column
 				spamreader = csv.reader(csvfile, delimiter=';', quotechar='"')
+				# spamreader = numpy.loadtxt(open(filename,'rb'),delimiter=csv_delimiter,skiprows=0) 	#ajout TM - test rapidité import
 				#Iterating over each cell
 				for row in spamreader:
 					if(self.isKilled() == True):
@@ -61,15 +62,17 @@ class loadCSV(PlantMapThreadInterface):
 						taxon_unicode = "'" + taxon_unicode + "'"
 					if row: 
 						# get the description from the layer of the cell contents
-						descriptionFeature = self.pme.get_description(taxon_unicode,self.layer,self.iterationField,self.descriptionField, self.whereEditable)
-						if descriptionFeature != None:       
-							self.listTaxon.append((taxon_unicode,descriptionFeature,"OK"))
-							self.addTaxonSignal.emit(unicode(taxon_unicode),unicode(descriptionFeature),"OK")
-							# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"OK")
-						else:
-							self.listTaxon.append((taxon_unicode,descriptionFeature,"NOK"))
-							# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"NOK")
-							self.addTaxonSignal.emit(unicode(taxon_unicode),unicode(descriptionFeature),"NOK")
+	#					descriptionFeature = self.pme.get_description(taxon_unicode,self.layer,self.iterationField,self.descriptionField, self.whereEditable)
+	#					if descriptionFeature != None:       
+	#						self.listTaxon.append((taxon_unicode,descriptionFeature,"OK"))
+							self.listTaxon.append((taxon_unicode,"-","OK"))	#ajout TM
+	#						self.addTaxonSignal.emit(unicode(taxon_unicode),unicode(descriptionFeature),"OK")
+							self.addTaxonSignal.emit(unicode(taxon_unicode),"-","OK")	#ajout TM
+	#						# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"OK")
+	#					else:
+	#						self.listTaxon.append((taxon_unicode,descriptionFeature,"NOK"))
+	#						# self.manageUIList.addTaxon(taxon_unicode,descriptionFeature,"NOK")
+	#						self.addTaxonSignal.emit(unicode(taxon_unicode),unicode(descriptionFeature),"NOK")
 				self.timerEnd()
 				self.logProgress.emit(Logger.INFO, u"=> Fin du chargement <=" )
 		except Exception as e:
